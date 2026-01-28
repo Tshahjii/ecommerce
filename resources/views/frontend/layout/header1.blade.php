@@ -39,8 +39,8 @@
                                                     items</span>
                                             </div>
                                             <div class="avatar avatar-xl hover-scale-in"><img height="80"
-                                                    src="frontend/assets/img/electronic/iphone_12.png" title=""
-                                                    alt="">
+                                                    src="{{ asset('frontend/assets/img/electronic/iphone_12.png') }}"
+                                                    title="" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -55,8 +55,8 @@
                                                     items</span>
                                             </div>
                                             <div class="avatar avatar-xl hover-scale-in"><img height="80"
-                                                    src="frontend/assets/img/electronic/iphone_13.png" title=""
-                                                    alt="">
+                                                    src="{{ asset('frontend/assets/img/electronic/iphone_13.png') }}"
+                                                    title="" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -72,8 +72,8 @@
                                                     items</span>
                                             </div>
                                             <div class="avatar avatar-xl hover-scale-in"><img height="80"
-                                                    src="frontend/assets/img/electronic/iphone_ios.png" title=""
-                                                    alt="">
+                                                    src="{{ asset('frontend/assets/img/electronic/iphone_ios.png') }}"
+                                                    title="" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -88,8 +88,8 @@
                                                     items</span>
                                             </div>
                                             <div class="avatar avatar-xl hover-scale-in"><img height="80"
-                                                    src="frontend/assets/img/electronic/shop_iphone.png" title=""
-                                                    alt="">
+                                                    src="{{ asset('frontend/assets/img/electronic/shop_iphone.png') }}"
+                                                    title="" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                     @endif
                                 </div>
                                 <div class="row g-0 px-4 px-lg-5 py-3 align-items-center rounded bg-cover bg-fiex bg-center border mt-4"
-                                    style="background-image: url(frontend/assets/img/electronic/el-banner-6.jpg);">
+                                    style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-6.jpg') }}');">
                                     <div class="col-md-8 my-3 text-center text-md-start">
                                         <h3 class="h3 text-white m-0">Eat clean &amp; green. Eat Organic.</h3>
                                     </div>
@@ -197,7 +197,7 @@
                             <label class="px-dropdown-toggle mob-menu"></label>
                             <div class="vertical-mm-in">
                                 <div class="row g-0 px-4 px-lg-5 py-3 align-items-center rounded bg-cover bg-fiex bg-center border mb-4"
-                                    style="background-image: url(frontend/assets/img/electronic/el-banner-6.jpg);">
+                                    style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-6.jpg') }}');">
                                     <div class="col-md-8 my-3 text-center text-md-start">
                                         <h3 class="h3 text-white m-0">Eat clean &amp; green. Eat Organic.</h3>
                                     </div>
@@ -253,7 +253,7 @@
                                     </div>
                                     <div class="col-lg-6 d-flex flex-column">
                                         <div class="rounded h-100 bg-cover bg-no-repeat d-flex align-items-center justify-content-center py-8 p-xl-5"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-2.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-2.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>
@@ -275,7 +275,7 @@
                                 <div class="row g-3">
                                     <div class="col-lg-4">
                                         <div class="min-h-250px bg-center bg-cover rounded d-flex flex-column align-items-center justify-content-center"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-1.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-1.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>
@@ -288,7 +288,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="min-h-250px bg-center bg-cover rounded d-flex flex-column align-items-center justify-content-center"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-2.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-2.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>
@@ -301,7 +301,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="min-h-250px bg-center bg-cover rounded d-flex flex-column align-items-center justify-content-center"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-3.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-3.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>
@@ -314,7 +314,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="min-h-250px bg-center bg-cover rounded d-flex flex-column align-items-center justify-content-center"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-4.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-4.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>
@@ -327,7 +327,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="min-h-250px bg-center bg-cover rounded d-flex flex-column align-items-center justify-content-center"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-5.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-5.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>
@@ -340,7 +340,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="min-h-250px bg-center bg-cover rounded d-flex flex-column align-items-center justify-content-center"
-                                            style="background-image: url(frontend/assets/img/electronic/el-banner-6.jpg);">
+                                            style="background-image: url('{{ asset('frontend/assets/img/electronic/el-banner-6.jpg') }}');">
                                             <div class="w-100 text-center">
                                                 <h6 class="text-uppercase fw-300 text-white mb-2">NEW IN</h6>
                                                 <h3 class="fw-400 h3 text-white">Canyon<br>Star Raider</h3>

@@ -39,201 +39,57 @@
                               }
                         }'>
                  <div class="swiper-wrapper">
-                     <div class="swiper-slide">
-                         <div class="product-card-3">
-                             <div class="product-card-image">
-                                 <div class="badge-ribbon">
-                                     <span class="badge bg-danger">Sale</span>
-                                 </div>
-                                 <div class="product-action">
-                                     <a href="#" class="btn btn-dark"><i class="fa-sharp fa-regular fa-heart"></i>
-                                     </a><a href="#" class="btn btn-dark"><i class="fa-solid fa-repeat"></i>
-                                     </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i class="fa-solid fa-eye"></i>
-                                     </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i
-                                             class="fa-regular fa-cart-shopping-fast"></i></a>
-                                 </div>
-                                 <div class="product-media">
-                                     <a href="#"><img class="img-fluid"
-                                             src="{{ asset('frontend/assets/img/fashion3/product-11.jpg') }}"
-                                             title="" alt="" /></a>
-                                 </div>
-                             </div>
-                             <div class="product-card-info">
-                                 <h6 class="product-title">
-                                     <a href="#">Fine-knit sweater</a>
-                                 </h6>
-                                 <div class="product-price">
-                                     <span class="text-primary">$28.<small>50</small></span>
-                                     <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="swiper-slide">
-                         <div class="product-card-3">
-                             <div class="product-card-image">
-                                 <div class="badge-ribbon">
-                                     <span class="badge bg-danger">Sale</span>
-                                 </div>
-                                 <div class="product-action">
-                                     <a href="#" class="btn btn-dark"><i class="fa-sharp fa-regular fa-heart"></i>
-                                     </a><a href="#" class="btn btn-dark"><i class="fa-solid fa-repeat"></i>
-                                     </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i class="fa-solid fa-eye"></i>
-                                     </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i
-                                             class="fa-regular fa-cart-shopping-fast"></i></a>
-                                 </div>
-                                 <div class="product-media">
-                                     <a href="#"><img class="img-fluid"
-                                             src="{{ asset('frontend/assets/img/fashion3/product-18.jpg') }}"
-                                             title="" alt="" /></a>
+                     @if ($related->count())
+                         @foreach ($related as $values)
+                             <div class="swiper-slide">
+                                 <div class="product-card-3">
+                                     <div class="product-card-image">
+                                         <div class="badge-ribbon">
+                                             <span class="badge bg-danger">Sale</span>
+                                         </div>
+                                         <div class="product-action">
+                                             <a href="#" class="btn btn-dark"><i
+                                                     class="fa-sharp fa-regular fa-heart"></i>
+                                             </a><a href="#" class="btn btn-dark"><i
+                                                     class="fa-solid fa-repeat"></i>
+                                             </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
+                                                 href="javascript:void(0)" data-id="{{ $values->id }}"
+                                                 class="btn btn-dark show-product-details"><i
+                                                     class="fa-solid fa-eye"></i>
+                                             </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
+                                                 href="javascript:void(0)" class="btn btn-dark"><i
+                                                     class="fa-regular fa-cart-shopping-fast"></i></a>
+                                         </div>
+                                         <div class="product-media">
+                                             <a href="{{ route('product-detail', ['id' => encrypt($values->id)]) }}">
+                                                 <img class="img-fluid product-img"
+                                                     src="{{ $values->firstProductImage
+                                                         ? asset('backend/upload/image/product/' . $values->product_slug . '/' . $values->firstProductImage->image_path)
+                                                         : asset('backend/assets/images/default_image.jpg') }}"
+                                                     alt="" /></a>
+                                         </div>
+                                     </div>
+                                     <div class="product-card-info">
+                                         <h6 class="product-title">
+                                             <a href="#">{{ $values->product_title }}</a>
+                                         </h6>
+                                         @php
+                                             $price = number_format($values->product_price, 2);
+                                             $priceParts = explode('.', $price);
+                                             $compare = number_format($values->compare_price, 2);
+                                             $compareParts = explode('.', $compare);
+                                         @endphp
+                                         <div class="product-price">
+                                             <span
+                                                 class="text-primary">₹{{ $priceParts[0] }}.<small>{{ $priceParts[1] }}</small></span>
+                                             <del
+                                                 class="fs-sm text-muted">₹{{ $compareParts[0] }}.<small>{{ $compareParts[1] }}</small></del>
+                                         </div>
+                                     </div>
                                  </div>
                              </div>
-                             <div class="product-card-info">
-                                 <h6 class="product-title">
-                                     <a href="#">Fine-knit sweater</a>
-                                 </h6>
-                                 <div class="product-price">
-                                     <span class="text-primary">$28.<small>50</small></span>
-                                     <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="swiper-slide">
-                         <div class="product-card-3">
-                             <div class="product-card-image">
-                                 <div class="badge-ribbon">
-                                     <span class="badge bg-danger">Sale</span>
-                                 </div>
-                                 <div class="product-action">
-                                     <a href="#" class="btn btn-dark"><i class="fa-sharp fa-regular fa-heart"></i>
-                                     </a><a href="#" class="btn btn-dark"><i class="fa-solid fa-repeat"></i>
-                                     </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i class="fa-solid fa-eye"></i>
-                                     </a><a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i
-                                             class="fa-regular fa-cart-shopping-fast"></i></a>
-                                 </div>
-                                 <div class="product-media">
-                                     <a href="#"><img class="img-fluid"
-                                             src="{{ asset('frontend/assets/img/fashion3/product-12.jpg') }}"
-                                             title="" alt="" /></a>
-                                 </div>
-                             </div>
-                             <div class="product-card-info">
-                                 <h6 class="product-title">
-                                     <a href="#">Fine-knit sweater</a>
-                                 </h6>
-                                 <div class="product-price">
-                                     <span class="text-primary">$28.<small>50</small></span>
-                                     <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="swiper-slide">
-                         <div class="product-card-3">
-                             <div class="product-card-image">
-                                 <div class="badge-ribbon">
-                                     <span class="badge bg-danger">Sale</span>
-                                 </div>
-                                 <div class="product-action">
-                                     <a href="#" class="btn btn-dark"><i
-                                             class="fa-sharp fa-regular fa-heart"></i> </a><a href="#"
-                                         class="btn btn-dark"><i class="fa-solid fa-repeat"></i> </a><a
-                                         data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i
-                                             class="fa-solid fa-eye"></i> </a><a data-bs-toggle="modal"
-                                         data-bs-target="#px-quick-view" href="javascript:void(0)"
-                                         class="btn btn-dark"><i class="fa-regular fa-cart-shopping-fast"></i></a>
-                                 </div>
-                                 <div class="product-media">
-                                     <a href="#"><img class="img-fluid"
-                                             src="{{ asset('frontend/assets/img/fashion3/product-14.jpg') }}"
-                                             title="" alt="" /></a>
-                                 </div>
-                             </div>
-                             <div class="product-card-info">
-                                 <h6 class="product-title">
-                                     <a href="#">Fine-knit sweater</a>
-                                 </h6>
-                                 <div class="product-price">
-                                     <span class="text-primary">$28.<small>50</small></span>
-                                     <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="swiper-slide">
-                         <div class="product-card-3">
-                             <div class="product-card-image">
-                                 <div class="badge-ribbon">
-                                     <span class="badge bg-danger">Sale</span>
-                                 </div>
-                                 <div class="product-action">
-                                     <a href="#" class="btn btn-dark"><i
-                                             class="fa-sharp fa-regular fa-heart"></i> </a><a href="#"
-                                         class="btn btn-dark"><i class="fa-solid fa-repeat"></i> </a><a
-                                         data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i
-                                             class="fa-solid fa-eye"></i> </a><a data-bs-toggle="modal"
-                                         data-bs-target="#px-quick-view" href="javascript:void(0)"
-                                         class="btn btn-dark"><i class="fa-regular fa-cart-shopping-fast"></i></a>
-                                 </div>
-                                 <div class="product-media">
-                                     <a href="#"><img class="img-fluid"
-                                             src="{{ asset('frontend/assets/img/fashion3/product-15.jpg') }}"
-                                             title="" alt="" /></a>
-                                 </div>
-                             </div>
-                             <div class="product-card-info">
-                                 <h6 class="product-title">
-                                     <a href="#">Fine-knit sweater</a>
-                                 </h6>
-                                 <div class="product-price">
-                                     <span class="text-primary">$28.<small>50</small></span>
-                                     <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="swiper-slide">
-                         <div class="product-card-3">
-                             <div class="product-card-image">
-                                 <div class="badge-ribbon">
-                                     <span class="badge bg-danger">Sale</span>
-                                 </div>
-                                 <div class="product-action">
-                                     <a href="#" class="btn btn-dark"><i
-                                             class="fa-sharp fa-regular fa-heart"></i> </a><a href="#"
-                                         class="btn btn-dark"><i class="fa-solid fa-repeat"></i> </a><a
-                                         data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                         href="javascript:void(0)" class="btn btn-dark"><i
-                                             class="fa-solid fa-eye"></i> </a><a data-bs-toggle="modal"
-                                         data-bs-target="#px-quick-view" href="javascript:void(0)"
-                                         class="btn btn-dark"><i class="fa-regular fa-cart-shopping-fast"></i></a>
-                                 </div>
-                                 <div class="product-media">
-                                     <a href="#"><img class="img-fluid"
-                                             src="{{ asset('frontend/assets/img/fashion3/product-16.jpg') }}"
-                                             title="" alt="" /></a>
-                                 </div>
-                             </div>
-                             <div class="product-card-info">
-                                 <h6 class="product-title">
-                                     <a href="#">Fine-knit sweater</a>
-                                 </h6>
-                                 <div class="product-price">
-                                     <span class="text-primary">$28.<small>50</small></span>
-                                     <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
+                         @endforeach
+                     @endif
                  </div>
                  <div class="swiper-pagination mt-4 d-lg-none position-relative"></div>
              </div>

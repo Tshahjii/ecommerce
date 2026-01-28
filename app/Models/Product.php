@@ -33,6 +33,10 @@ class Product extends Model
     {
         return $this->belongsTo(ChildCategory::class, 'child_category', 'id');
     }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brands');
+    }
     public static function allProduct($request)
     {
         $query = self::select('id', 'product_title', 'product_slug', 'product_status', 'stocks', 'product_price', 'compare_price', 'child_category', 'released_date')->with(['firstProductImage', 'productCategory']);

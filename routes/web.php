@@ -4,19 +4,29 @@ use App\Http\Controllers\backend\site\BrandController;
 use App\Http\Controllers\backend\site\ChildCategoryController;
 use App\Http\Controllers\backend\site\CategoryController;
 use App\Http\Controllers\backend\site\DashboardController;
+use App\Http\Controllers\backend\site\DiscountController;
 use App\Http\Controllers\backend\site\ProductController;
 use App\Http\Controllers\backend\site\SubCategoryController;
 use App\Http\Controllers\frontend\site\AuthController;
+use App\Http\Controllers\frontend\site\CartController;
 use App\Http\Controllers\frontend\site\CheckoutController;
 use App\Http\Controllers\frontend\site\IndexController;
 use App\Http\Controllers\frontend\site\ProductDetailController;
 use App\Http\Controllers\frontend\site\ShopPageController;
 use App\Http\Middleware\AuthMiddleware;
-use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('home-page');
-Route::get('/product-detail', [ProductDetailController::class, 'productDetail'])->name('product-detail');
+
+Route::get('/product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
+Route::get('/get-product-details/{id}', [ProductDetailController::class, 'getProductDetails'])->name('get-product-details');
+
+Route::get('/product-cart/{uid}', [CartController::class, 'cart'])->name('product-cart');
+Route::get('/delete-cart-product/{id}', [CartController::class, 'deleteCartProduct'])->name('delete-cart-product');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->name('update-cart');
+Route::post('/check-code', [CartController::class, 'checkCode'])->name('check-code');
+
 Route::get('/shop-page', [ShopPageController::class, 'shopPage'])->name('shop-page');
 Route::get('/shop-full-page', [ShopPageController::class, 'shopFullPage'])->name('shop-full-page');
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
@@ -75,7 +85,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('/master-brands/bulk-upload', [BrandController::class, 'bulkUpload'])->name('brands-bulkupload');
         Route::get('/master-brands/download-sheet', [BrandController::class, 'downloadBrandSheet'])->name('brands-sheet');
         Route::get('master-brands/brands-excel', [BrandController::class, 'downloadExcelBrands'])->name('brands-excel');
-        Route::get('master-brands/brands-pdf', [BrandController::class, 'downloadPdfBrands'])->name('brands-pdf');
+        Route::get('/master-brands/brands-pdf', [BrandController::class, 'downloadPdfBrands'])->name('brands-pdf');
         Route::post('/create-brands', [BrandController::class, 'createBrands'])->name('create-brands');
         Route::post('/brands-bulk-upload', [BrandController::class, 'brandsBulkUpload'])->name('brands-bulk-upload');
 
@@ -89,6 +99,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('/master-product/master-category', [ProductController::class, 'category'])->name('master-category');
         Route::get('/master-product/master-child-category/{id}', [ProductController::class, 'childCategory'])->name('master-child-category');
         Route::get('/master-product/master-sub-category/{id}', [ProductController::class, 'subCategory'])->name('master-sub-category');
+        Route::get('/master-product/related-product/{id}', [ProductController::class, 'relatedProduct'])->name('related-product');
         Route::get('/master-product/master-brands', [ProductController::class, 'brands'])->name('master-brands');
         Route::get('/master-product/get-product', [ProductController::class, 'getProduct'])->name('get-product');
         Route::get('/master-product/delete-products-image/{id}', [ProductController::class, 'deleteProductImage'])->name('delete-products-image');
@@ -103,7 +114,12 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::post('/show-publish-products', [ProductController::class, 'showPublishedProduct'])->name('show-publish-products');
         Route::post('/show-draft-products', [ProductController::class, 'showDraftProduct'])->name('show-draft-products');
         Route::post('/show-products-image', [ProductController::class, 'showProductImage'])->name('show-products-image');
-        Route::delete('product-image-delete/{id}', [ProductController::class, 'deleteImages'])->name('product-image-delete');
+        Route::delete('/product-image-delete/{id}', [ProductController::class, 'deleteImages'])->name('product-image-delete');
+
+        Route::get('/master-discount/index', [DiscountController::class, 'discount'])->name('discount');
+        Route::get('/master-discount/get-discount/{id}', [DiscountController::class, 'getDiscount'])->name('get-discount');
+        Route::get('/master-discount/delete-discount/{id}', [DiscountController::class, 'deleteDiscount'])->name('delete-discount');
+        Route::post('/create-discount', [DiscountController::class, 'createDiscount'])->name('create-discount');
 
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     });

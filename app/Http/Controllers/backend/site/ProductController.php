@@ -56,6 +56,11 @@ class ProductController extends Controller
         $sub_category = SubCategory::select('id', 'sub_category')->where('child_category_id', $id)->orderBy('id', 'DESC')->get();
         return response()->json(['status' => 'success', 'data' => $sub_category]);
     }
+    public function relatedProduct($id)
+    {
+        $related_product = Product::select('id', 'product_title')->where('sub_category', $id)->get();
+        return response()->json(['status' => 'success', 'data' => $related_product]);
+    }
     public function brands()
     {
         $brands = Brand::select('id', 'brands')->orderBy('id', 'DESC')->get();
@@ -110,6 +115,7 @@ class ProductController extends Controller
             'barcodes'             => 'nullable|string|max:255',
             'released_date'        => 'required',
         ]);
+        $validated['related_product'] = isset($validated['related_product']) ? implode(',', $validated['related_product']) : null;
         Product::create($validated);
         return redirect()->back()->with('success', 'Product added successfully');
     }
@@ -140,6 +146,7 @@ class ProductController extends Controller
             'barcodes'             => 'nullable|string|max:255',
             'released_date'        => 'required|date',
         ]);
+        $validated['related_product'] = isset($validated['related_product']) ? implode(',', $validated['related_product']) : null;
         $product = Product::findOrFail($productId);
         $product->update($validated);
         return redirect()->back()->with('success', 'Product updated successfully');

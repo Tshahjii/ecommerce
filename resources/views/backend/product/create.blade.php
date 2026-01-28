@@ -288,8 +288,8 @@
                         <div class="mb-3">
                             <label for="related_product" class="form-label">Related Products</label>
                             <select class="js-example-basic-single @error('related_product') is-invalid @enderror"
-                                id="related_product" name="related_product" multiple>
-                                <option value="" selected>Related Products</option>
+                                id="related_product" name="related_product[]" multiple>
+                                <option value="" disabled>Related Products</option>
                             </select>
                             @error('related_product')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -319,11 +319,15 @@
                             <div class="col-md-12 col-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="barcodes">Barcode</label>
-                                    <input type="text" class="form-control @error('barcodes') is-invalid @enderror"
-                                        id="barcodes" name="barcodes" placeholder="Barcodes">
-                                    @error('barcodes')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <div class="input-group has-validation mb-3">
+                                        <span class="input-group-text" id="product-price-addon">SHAH</span>
+                                        <input type="text"
+                                            class="form-control @error('barcodes') is-invalid @enderror" id="barcodes"
+                                            name="barcodes" placeholder="Barcodes" maxlength="6">
+                                        @error('barcodes')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="released_date">Publish Date</label>
@@ -360,6 +364,7 @@
             $('#child_category').select2();
             $('#sub_category').select2();
             $('#brands').select2();
+            $('#related_product').select2();
             // Load Master Categories
             $.ajax({
                 url: "{{ route('master-category') }}",
@@ -455,6 +460,35 @@
                     alert("Something went wrong!");
                 }
             });
+
+            $('#sub_category').on('change', function() {
+                let sub_category = $(this).val();
+                if (!sub_category) return;
+                let related_product = $('#related_product');
+                related_product.empty();
+                related_product.append(
+                    '<option value="" disabled>Related Products</option>');
+                $.ajax({
+                    url: "{{ route('related-product', ':id') }}".replace(':id',
+                        sub_category),
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        $.each(response.data, function(key, value) {
+                            related_product.append(
+                                '<option value="' + value.id + '">' + value
+                                .product_title +
+                                '</option>'
+                            );
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert("Something went wrong!");
+                    }
+                });
+            });
+
             $('#product_title').on('input', function() {
                 let title = $(this).val();
                 let ucfirst = title.toLowerCase().replace(/\b\w/g, function(char) {

@@ -27,9 +27,7 @@
                     </div>
                     <div class="col-lg-6 d-flex flex-column">
                         <div class="rounded h-100 bg-cover bg-no-repeat d-flex align-items-center justify-content-center py-8 p-xl-5"
-                            style="
-                          background-image: url(frontend/assets/img/fashion/blog-home-3.jpg);
-                        ">
+                            style="background-image: url('{{ asset('frontend/assets/img/fashion/blog-home-3.jpg') }}');">
                             <div class="w-100 text-center">
                                 <h6 class="text-uppercase fw-300 text-white mb-2">
                                     NEW IN

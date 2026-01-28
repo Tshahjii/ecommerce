@@ -313,9 +313,9 @@
                         <div class="mb-3">
                             <label for="related_product" class="form-label">Related Products</label>
                             <select class="js-example-basic-single @error('related_product') is-invalid @enderror"
-                                id="related_product" name="related_product" multiple
+                                id="related_product" name="related_product[]" multiple
                                 value="{{ $product->related_product }}">
-                                <option value="" selected>Related Products</option>
+                                <option value="" disabled>Related Products</option>
                             </select>
                             @error('related_product')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -345,12 +345,16 @@
                             <div class="col-md-12 col-12">
                                 <div class="mb-3">
                                     <label class="form-label" for="barcodes">Barcode</label>
-                                    <input type="text" class="form-control @error('barcodes') is-invalid @enderror"
-                                        id="barcodes" name="barcodes" placeholder="Barcodes"
-                                        value="{{ $product->barcodes }}">
-                                    @error('barcodes')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <div class="input-group has-validation mb-3">
+                                        <span class="input-group-text" id="product-price-addon">SHAH</span>
+                                        <input type="text"
+                                            class="form-control @error('barcodes') is-invalid @enderror" id="barcodes"
+                                            name="barcodes" placeholder="Barcodes" value="{{ $product->barcodes }}"
+                                            maxlength="6">
+                                        @error('barcodes')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="released_date">Publish Date</label>
@@ -392,8 +396,16 @@
             let selectedChildCategory = "{{ $product->child_category }}";
             let selectedSubCategory = "{{ $product->sub_category }}";
             let selectedBrands = "{{ $product->brands }}";
+            let selectedProduct = "{{ $product->related_product }}";
+            selectedProduct = selectedProduct ? selectedProduct.split(',') : [];
 
-            $('#category, #child_category, #sub_category, #brands').select2();
+            // current editing product id
+            let currentProductId = "{{ $product->id }}";
+
+            // safety: agar khud ka id selectedProduct me ho to hata do
+            selectedProduct = selectedProduct.filter(id => id != currentProductId);
+
+            $('#category, #child_category, #sub_category, #brands, #related_product').select2();
 
             /* =========================
                LOAD MASTER CATEGORY
@@ -505,6 +517,42 @@
                         brands.val(selectedBrands).trigger('change');
                     }
                 }
+            });
+
+            $('#sub_category').on('change', function() {
+                let sub_category = $(this).val();
+                if (!sub_category) return;
+                let related_product = $('#related_product');
+                related_product.empty();
+                related_product.append('<option value="" disabled>Related Products</option>');
+                $.ajax({
+                    url: "{{ route('related-product', ':id') }}".replace(':id', sub_category),
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        let related_product = $('#related_product');
+                        $.each(response.data, function(key, value) {
+                            if (value.id == currentProductId) {
+                                return true; // continue
+                            }
+
+                            related_product.append(
+                                $('<option>', {
+                                    value: value.id,
+                                    text: value.product_title
+                                })
+                            );
+                        });
+                        if (selectedProduct.length > 0) {
+                            related_product.val(selectedProduct).trigger('change');
+                        }
+                    },
+
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert("Something went wrong!");
+                    }
+                });
             });
 
             $('#product_title').on('input', function() {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Sidebar;
 use Illuminate\Support\Facades\Route;
 
@@ -32,5 +33,11 @@ if (!function_exists('isAnyChildActive')) {
             }
         }
         return false;
+    }
+}
+if (!function_exists('sareesProduct')) {
+    function sareesProduct()
+    {
+        return Product::with('firstProductImage')->where('sub_category', 36)->get();
     }
 }

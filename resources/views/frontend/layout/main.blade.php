@@ -19,6 +19,57 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/sharp-regular.css" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/sharp-light.css" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/duotone.css" />
+    <style>
+        .shahproduct-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .shahproduct-img {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shahproduct-img {
+                height: 150px;
+            }
+        }
+
+        .product-galleryies {
+            height: 540px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-galleryies img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) {
+            .product-galleryies {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-galleryies {
+                height: 250px;
+            }
+        }
+
+        .product-img {
+            width: 100%;
+            height: 40vh;
+            object-fit: contain;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,6 +80,7 @@
             @yield('content')
         </main>
         @include('frontend.layout.footer')
+        @include('frontend.layout.modal')
     </div>
     @yield('script')
     <script src="{{ asset('frontend/assets/js/jquery-3.5.1.min.js') }}"></script>
@@ -43,6 +95,7 @@
     <script src="{{ asset('frontend/assets/js/color-modes.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
             const input = document.querySelector("#mobile_no");
@@ -73,6 +126,35 @@
                 } else {
                     $('#otpBtn').attr('disabled', 'disabled');
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').on('click', function(e) {
+                e.preventDefault();
+                let quantity = Math.max(1, parseInt($('#qtybutton').val()) || 1);
+                let product_id = $(this).data('id');
+                $.ajax({
+                    url: "{{ route('add-to-cart') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        qty: quantity,
+                        id: product_id
+                    },
+                    success: function(response) {
+                        if (response.status === true) {
+                            window.location.href = response.redirect_url;
+                        }
+                        window.location.href = response.redirect_url;
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                        alert("Something went wrong!");
+                    }
+                });
             });
         });
     </script>

@@ -9,7 +9,7 @@
                     {{-- Banner column --}}
                     <div class="col-12 col-md-3 col-xl-4 d-flex flex-row">
                         <div class="min-h-200px bg-center bg-cover d-flex align-items-center justify-content-center h-100 w-100"
-                            style="background-image: url(frontend/assets/img/fashion/blog-home-2.jpg);">
+                            style="background-image: url('{{ asset('frontend/assets/img/fashion/blog-home-2.jpg') }}');">
                             <div class="text-center px-4 py-3">
                                 <h6 class="text-uppercase text-white mb-0 letter-spacing-4 fw-300">
                                     NEW IN

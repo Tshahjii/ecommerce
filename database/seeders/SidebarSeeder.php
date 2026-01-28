@@ -22,7 +22,7 @@ class SidebarSeeder extends Seeder
             ['parent_id' => null, 'tab_name' => 'products', 'tab_icons' => 'ri-layout-3-line', 'link_url' => 'dashboard', 'tab_order' => 6],
             ['parent_id' => null, 'tab_name' => 'shipping', 'tab_icons' => 'ri-apps-2-line', 'link_url' => 'dashboard', 'tab_order' => 7],
             ['parent_id' => null, 'tab_name' => 'orders', 'tab_icons' => 'ri-pages-line', 'link_url' => 'dashboard', 'tab_order' => 8],
-            ['parent_id' => null, 'tab_name' => 'discount', 'tab_icons' => 'ri-pencil-ruler-2-line', 'link_url' => 'dashboard', 'tab_order' => 9],
+            ['parent_id' => null, 'tab_name' => 'discount', 'tab_icons' => 'ri-pencil-ruler-2-line', 'link_url' => 'discount', 'tab_order' => 9],
             ['parent_id' => null, 'tab_name' => 'users', 'tab_icons' => 'ri-account-circle-line', 'link_url' => 'dashboard', 'tab_order' => 10],
             ['parent_id' => null, 'tab_name' => 'master Setup', 'tab_icons' => 'ri-pie-chart-line', 'link_url' => 'dashboard', 'tab_order' => 11],
 
